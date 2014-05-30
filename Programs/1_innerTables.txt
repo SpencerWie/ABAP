@@ -1,0 +1,43 @@
+*&---------------------------------------------------------------------*
+*& Report  Z_INTERNAL_TABLES
+*& By Spencer Wieczorek
+*&
+*& Desc : Make an Internal Table from ZEMPLOYEE That only contains the places "Avon, IN".
+*&        Then add something to the internal table.
+*&---------------------------------------------------------------------*
+REPORT  Z_INTERNAL_TABLES.
+
+* Create our internal Table.
+DATA: lt_employee type table of zemployee.
+
+* Place data from zemployee table to internal table.
+SELECT * FROM zemployee INTO TABLE lt_employee WHERE place = '''Avon, IN'''.
+
+* Get largest ID, then add one: will be next id.
+DATA: obj_employee TYPE zemployee, idCounter type i.
+LOOP AT lt_employee into obj_employee.
+  idCounter = obj_employee-id.
+ENDLOOP.
+idCounter = idCounter + 1.
+
+* Add Item to table
+DATA: temp_employee type zemployee.
+  temp_employee-id = idCounter.
+  temp_employee-name = '''John'''.
+  temp_employee-place = '''Avon, IN'''.
+INSERT temp_employee INTO TABLE lt_employee.
+
+* Change the Place of the first employee to 'Indianapolis, IN'.
+obj_employee-place = '''Indianapolis, IN'''.
+MODIFY lt_employee FROM obj_employee INDEX 1 TRANSPORTING place.
+
+* Delete the second element "Spencer"
+DELETE lt_employee INDEX 2.
+
+* Sort the table
+SORT lt_employee BY name.
+
+* Write Data On Screen
+LOOP AT lt_employee INTO obj_employee.
+  WRITE:/ obj_employee-id, obj_employee-name, obj_employee-place.
+ENDLOOP.

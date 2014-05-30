@@ -1,0 +1,46 @@
+*&---------------------------------------------------------------------*
+*&   Report  Z_TABLE_WRITING
+*& - Spencer Wieczorek
+*&---------------------------------------------------------------------*
+REPORT  Z_TABLE_WRITING.
+
+* Local item to be added to table.
+DATA: ls_newEmployee TYPE zemployee.
+
+* Add two input elements to the page.
+PARAMETERS: Name  TYPE zemployee-name LOWER CASE,
+            Place TYPE zemployee-place LOWER CASE.
+
+* Increment counter for ID.
+DATA: LV_NUMBER_RANGE(10) TYPE N,   
+      LV_YEAR TYPE INRI-TOYEAR,         
+      LV_SUBOBJECT TYPE  T001-BUKRS,     
+      LV_RC TYPE INRI-RETURNCODE.          
+
+CALL FUNCTION 'NUMBER_GET_NEXT'
+  EXPORTING
+    NR_RANGE_NR             = '1'               
+    OBJECT                  = 'Z_AUTO_INC'      
+    SUBOBJECT               = 'IN01' 
+    TOYEAR                  = '2014'       
+  IMPORTING
+    NUMBER                  = LV_NUMBER_RANGE "-- Next ID number
+    RETURNCODE              = LV_RC.          "-- Return code 
+
+* Get next ID, then Escape Quotes from input
+ls_newEmployee-id = LV_NUMBER_RANGE.
+ls_newEmployee-name = cl_abap_dyn_prg=>quote( Name ). 
+ls_newEmployee-place = cl_abap_dyn_prg=>quote( Place ).
+
+* Add to table
+insert zemployee from ls_newEmployee.
+
+* Write table on screen
+write:/10 'ID', 30 'Name', 60 'Place',/.
+
+DATA: get_employee TYPE zemployee.
+SELECT * FROM zemployee INTO get_employee.
+  write:/10 get_employee-id,
+        30 get_employee-name,
+        60 get_employee-place.
+ENDSELECT.
