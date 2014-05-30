@@ -1,0 +1,85 @@
+*&---------------------------------------------------------------------*
+*& Report  Z_STATEMENTS_LOOPS_3
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+
+REPORT  Z_STATEMENTS_LOOPS_3.
+DATA a TYPE i VALUE 10. " Values can be assigned in declartion
+DATA tab type c value cl_abap_char_utilities=>horizontal_tab. " assign tab value
+
+write:/ 'These are loop and control structure test:',/.
+
+* Basic IF
+
+IF a > 5.
+  WRITE:/ a,' >   5'.   " <= Output
+ENDIF.
+
+* IF-ELSE
+
+IF a > 15.
+  WRITE:/ a,' >   15'.
+ELSE.
+  WRITE:/ a,' <=  15'.  " <= Output
+ENDIF.
+
+* IF - ELSE IF - ELSE
+IF a >= 12.
+  WRITE:/ a,' >=  12'.
+ELSEIF a >= 11.
+  WRITE:/ a,' >=  11'.
+ELSEIF a >= 10.
+  WRITE:/ a,' >=  10'.   " <= Output
+ELSE.
+  WRITE:/ a,' <   10'.
+ENDIF.  
+
+* CASE [SWITCH]
+
+CASE a.
+  when 12. WRITE:/ '        a = 12'.
+  when 11. WRITE:/ '        a = 11'.
+  when 10. write:/ '        a = 10'.
+  when others. write:/ '        a != 10 or 11 or 12'.
+endcase.
+
+write:/.
+
+* Basic do loop
+  
+do a times. " 10 times
+  if 
+    sy-index = 6. write:/. " Just to seperate lines. 
+  endif.
+  write sy-index. "sy-index = current loop var pass.
+enddo.
+
+ 
+* Basic While
+
+while a > 0. " a goes from 10 to 0
+  a = a - 1.
+endwhile.
+
+write:/,/. 
+
+a = 10. " a is now 10.
+
+* CHECK = RETURN with no condition for single loop iteration. Ignores all other things and goes to next iteration.
+
+do a times. " 1  2  3  4  5   =>   done.
+  check sy-index < 6.
+  write sy-index.
+enddo.  
+    
+write:/. 
+    
+* EXIT = RETURN with no condition
+    
+do a times. " Write '10' 1 time(s).
+  write a.
+  exit.
+enddo.
