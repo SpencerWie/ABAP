@@ -27,7 +27,7 @@ DATA: temp_employee type zemployee.
   temp_employee-place = '''oldPlace'''.
 INSERT temp_employee INTO TABLE lt_employee.
 
-* Change the Place of the first employee to 'Indianapolis, IN'.
+* Change the Place of the first employee to 'newPlace'.
 obj_employee-place = '''newPlace'''.
 MODIFY lt_employee FROM obj_employee INDEX 1 TRANSPORTING place.
 
