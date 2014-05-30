@@ -2,7 +2,7 @@
 *& Report  Z_INTERNAL_TABLES
 *& By Spencer Wieczorek
 *&
-*& Desc : Make an Internal Table from ZEMPLOYEE That only contains the places "Avon, IN".
+*& Desc : Make an Internal Table from ZEMPLOYEE That only contains the places "oldPlace".
 *&        Then add something to the internal table.
 *&---------------------------------------------------------------------*
 REPORT  Z_INTERNAL_TABLES.
@@ -11,7 +11,7 @@ REPORT  Z_INTERNAL_TABLES.
 DATA: lt_employee type table of zemployee.
 
 * Place data from zemployee table to internal table.
-SELECT * FROM zemployee INTO TABLE lt_employee WHERE place = '''Avon, IN'''.
+SELECT * FROM zemployee INTO TABLE lt_employee WHERE place = '''oldPlace'''.
 
 * Get largest ID, then add one: will be next id.
 DATA: obj_employee TYPE zemployee, idCounter type i.
