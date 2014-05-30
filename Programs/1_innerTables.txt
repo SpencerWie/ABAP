@@ -24,11 +24,11 @@ idCounter = idCounter + 1.
 DATA: temp_employee type zemployee.
   temp_employee-id = idCounter.
   temp_employee-name = '''John'''.
-  temp_employee-place = '''Avon, IN'''.
+  temp_employee-place = '''oldPlace'''.
 INSERT temp_employee INTO TABLE lt_employee.
 
 * Change the Place of the first employee to 'Indianapolis, IN'.
-obj_employee-place = '''Indianapolis, IN'''.
+obj_employee-place = '''newPlace'''.
 MODIFY lt_employee FROM obj_employee INDEX 1 TRANSPORTING place.
 
 * Delete the second element "Spencer"
