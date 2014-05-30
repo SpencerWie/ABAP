@@ -1,0 +1,36 @@
+*&---------------------------------------------------------------------*
+*& Report  Z_STRINGS_4
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+
+REPORT  Z_STRINGS_4.
+data: str1(10), str2(10), str3(10), source(20) value 'abc-def-ghi'.
+
+* Split item at char into [ val_1, val_2, ... , val_n ]
+
+split source at '-' into str1 str2 str3.
+
+write:/ 'str1 = ', str1. 
+write:/ 'str2 = ', str2. 
+write:/ 'str3 = ', str3. 
+
+* (Search str_1 for str_2) => sy-subrc = 0 means found, sy-subrc = 4 means not found.
+
+data abap(4) value 'ABAP'.
+data string(30) value 'SAP ABAP Development'.
+
+search string for abap.
+if sy-subrc = 0.
+  write:/ 'found "ABAP" in "SAP ABAP Development".'.
+else.
+  write:/ 'did not find "ABAP" in "SAP ABAP Development".'.
+endif.
+
+* Replace str1 with str2 into str3
+
+replace 'Development' with 'World' into string.
+
+write:/ string.
