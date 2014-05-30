@@ -1,0 +1,33 @@
+*&---------------------------------------------------------------------*
+*& Report  ZDATATYPES_2
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+
+REPORT  ZDATATYPES_2. 
+
+* DATA means variable declaration. 
+
+DATA: char(10) TYPE c, " C = Character
+       num type n,    " N = Number 
+       date type D,   " D = Date
+       time type t,   " T = Time
+       hex type x,    " X = Hex
+       int type i,    " I = Int
+       packed type p decimals 2, " P = (Packed => decimal with cut-off)
+       float type f.   " F = Float
+       
+char = 'A'.
+num = '5.5'.
+date = sy-datum. " sy-datum = system date
+time = sy-uzeit. " sy-uzeit = system time
+hex = '3'.
+int = 10.
+packed = '5.123456789'. " this will be: 5.12
+float = '2.5'.
+write:/ 'Variables:'.
+write:/ 'char = ',char,/,'num = ',num,/,'date = ',date,/,'time = ',time,/,
+       'hex = ',hex,/,'int = ',int,/,'packed = ',packed,/,'float = ',float.
+
