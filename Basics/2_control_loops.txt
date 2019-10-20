@@ -83,3 +83,11 @@ do a times. " Write '10' 1 time(s).
   write a.
   exit.
 enddo.
+
+* CONTINUE = the current loop pass is exited and the next loop pass begins
+do a times. " Write all uneven numbers from 1 to 10.
+  if sy-index MOD 2 = 0. " index is even
+    CONTINUE. " Write will not be executed
+  endif
+  write sy-index.
+enddo.
