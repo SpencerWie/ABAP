@@ -17,7 +17,9 @@ DATA: char(10) TYPE c, " C = Character
        hex type x,    " X = Hex
        int type i,    " I = Int
        packed type p decimals 2, " P = (Packed => decimal with cut-off)
-       float type f.   " F = Float
+       float type f,   " F = Float
+       str type string.
+       
        
 char = 'A'.
 num = '5.5'.
@@ -27,7 +29,9 @@ hex = '3'.
 int = 10.
 packed = '5.123456789'. " this will be: 5.12
 float = '2.5'.
+str = 'StringValue'.
+
 write:/ 'Variables:'.
 write:/ 'char = ',char,/,'num = ',num,/,'date = ',date,/,'time = ',time,/,
-       'hex = ',hex,/,'int = ',int,/,'packed = ',packed,/,'float = ',float.
+       'hex = ',hex,/,'int = ',int,/,'packed = ',packed,/,'float = ',float, 'string = ',str.
 
